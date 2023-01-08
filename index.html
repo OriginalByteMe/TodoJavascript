@@ -4,8 +4,47 @@
     <meta charset="utf-8" />
     <title>Noah's TODO app</title>
     <script src="main.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    
+    <nav class="flex justify-center text-xl font-bold border-b-2 border-indigo-500 w-full h-8">
+      Noah's TODO app
+    </nav>
+    <!-- Content -->
+    <div class="flex">
+      <!-- Sidebar -->
+      <div class="absolute top-8 flex flex-col items-center left-0 w-[35vw] border-r-2 h-[100%] p-2">
+        <h1 class="top-2 text-xl font-bold border-b-2"> Projects</h1>
+        <form id="projects-form" class="pt-2 flex flex-col gap-2 border-b-2 pb-3">
+          <input
+            type="text"
+            name="project"
+            id="project"
+            class="border border-indigo-500 rounded-md"
+          />
+          <button type="submit" class="border-2 border-indigo-500 rounded-md hover:bg-indigo-300">
+            Add Project
+          </button>
+        </form>
+        <ul id="project-list">
+        </ul>
+      </div>
+      <!-- Main -->
+      <div class="ml-[35vw] mt-2 flex flex-col h-full justify-center items-center gap-2 w-full">
+        <h1 class="text-xl font-bold">Todo's for project []</h1>
+        <form>
+          <input
+            type="text"
+            name="todo"
+            id="todo"
+            class="border border-indigo-500 rounded-md"
+          />
+          <button type="submit" class="border-2 border-indigo-500 rounded-md hover:bg-indigo-300">
+            Add Todo
+          </button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
+
