@@ -1,10 +1,4 @@
-function component() {
-  const element = document.createElement('div');
+import UI from './components/mainUI';
 
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = "Hello Webpack"
-
-  return element;
-}
-
-document.body.appendChild(component());
+const ui = new UI();
+ui.render();
