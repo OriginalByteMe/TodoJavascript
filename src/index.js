@@ -1,4 +1,3 @@
-import UI from './components/mainUI';
+import mainUI from './components/mainUI';
 
-const ui = new UI();
-ui.render();
+mainUI().render();
