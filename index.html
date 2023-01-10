@@ -18,31 +18,54 @@
         <form id="projects-form" class="pt-2 flex flex-col gap-2 border-b-2 pb-3">
           <input
             type="text"
-            name="project"
-            id="project"
-            class="border border-indigo-500 rounded-md"
+            name="project-title"
+            id="project-title"
+            placeholder="Project Title"
+            class="border border-indigo-500 rounded-md p-1"
+            required
           />
-          <button type="submit" class="border-2 border-indigo-500 rounded-md hover:bg-indigo-300">
+          <button id="project-submit" class="border-2 border-indigo-500 rounded-md hover:bg-indigo-300">
             Add Project
           </button>
         </form>
-        <ul id="project-list">
+        <ul id="projects-list" class="mt-2">
         </ul>
       </div>
       <!-- Main -->
       <div class="ml-[35vw] mt-2 flex flex-col h-full justify-center items-center gap-2 w-full">
         <h1 class="text-xl font-bold">Todo's for project []</h1>
-        <form>
+        <form id="todo-form" class="flex flex-col gap-2 ">
+          <div>
+            <input
+              type="text"
+              name="todo"
+              placeholder="Todo name"
+              id="todo-title"
+              class="border border-indigo-500 rounded-md p-1"
+              required
+            />
+            <input
+              type="date"
+              name="date"
+              id="todo-date"
+              class="border border-indigo-500 rounded-md p-1"
+              required
+            />
+          </div>
           <input
             type="text"
-            name="todo"
-            id="todo"
-            class="border border-indigo-500 rounded-md"
+            name="description"
+            id="todo-description"
+            placeholder="Description"
+            class="border border-indigo-500 rounded-md p-1"
+            required
           />
-          <button type="submit" class="border-2 border-indigo-500 rounded-md hover:bg-indigo-300">
+          <button id="todo-submit" class="border-2 border-indigo-500 rounded-md hover:bg-indigo-300">
             Add Todo
           </button>
         </form>
+        <ul id="todo-list" class="mt-2">
+        </ul>
       </div>
     </div>
   </body>
