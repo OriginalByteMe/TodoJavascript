@@ -3,9 +3,19 @@ import TodoList from './Todolist';
 class Project {
   #todolist = new TodoList();
 
+  #isCurrent = false;
+
   constructor(id, name) {
     this.id = id;
     this.name = name;
+  }
+
+  get isCurrent() {
+    return this.#isCurrent;
+  }
+
+  set isCurrent(current) {
+    this.#isCurrent = current;
   }
 
   get todos() {
@@ -13,7 +23,11 @@ class Project {
   }
 
   addTodo(todo) {
-    this.#todolist.push(todo);
+    this.#todolist.addTodo(todo);
+  }
+
+  displayTodos() {
+    this.#todolist.displayTodos();
   }
 }
 

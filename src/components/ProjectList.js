@@ -1,7 +1,7 @@
 class ProjectList {
   #projects = [];
 
-  #selectedProject = null;
+  #selectedProject = [];
 
   get projects() {
     return this.#projects;
@@ -11,29 +11,44 @@ class ProjectList {
     return this.#projects.length;
   }
 
-  addProject(project) {
-    this.#projects.push(project);
+  get currentProject() {
+    return this.#selectedProject;
   }
 
-  static projectButton(project) {
+  set currentProject(project) {
+    this.#selectedProject.isCurrent = false;
+
+    this.#selectedProject = project;
+    this.#selectedProject.isCurrent = true;
+  }
+
+  addProject(project) {
+    this.#projects.push(project);
+    this.currentProject = project;
+  }
+
+  projectButton(project) {
     const projectBtn = document.createElement('button');
     projectBtn.innerHTML = `${project.name} ->`;
-    project.classList.add('border-2', 'border-indigo-500', 'rounded-md', 'hover:bg-indigo-300', 'p-1');
-    project.addEventListener('click', () => {
-      this.#selectedProject = project;
-      project.displayTodos();
+    projectBtn.classList.add('border-2', 'border-indigo-500', 'rounded-md', 'hover:bg-indigo-300', 'p-1');
+    projectBtn.addEventListener('click', () => {
+      this.currentProject = project;
+      this.displayProjects();
     });
-    return project;
+    return projectBtn;
   }
 
   displayProjects() {
-    console.log('projects:', this.#projects);
     const projectList = document.querySelector('#projects-list');
     projectList.innerHTML = '';
     this.#projects.forEach((project) => {
-      const projectBtn = ProjectList.projectButton(project);
+      const projectBtn = this.projectButton(project);
+      if (project.isCurrent) {
+        projectBtn.classList.add('bg-lime-500');
+      }
       projectList.appendChild(projectBtn);
     });
+    this.currentProject.displayTodos();
   }
 }
 

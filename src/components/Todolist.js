@@ -9,18 +9,14 @@ class TodoList {
     return this.#todos.length;
   }
 
-  addTodo(todo) {
-    this.#todos.push(todo);
-  }
-
   static todoCard(todo) {
     const card = document.createElement('div');
     const todoTitle = document.createElement('h3');
     const todoDescription = document.createElement('p');
     const todoDueDate = document.createElement('p');
-    todoTitle.innerHTML = `${todo.title}`;
+    todoTitle.innerHTML = `${todo.name}`;
     todoDescription.innerHTML = `${todo.description}`;
-    todoDueDate.innerHTML = `Due date: ${todo.dueDate}`;
+    todoDueDate.innerHTML = `Due date: ${todo.date}`;
     todoTitle.classList.add('text-xl', 'font-bold');
     todoDescription.classList.add('text-lg');
     todoDueDate.classList.add('text-lg');
@@ -29,6 +25,12 @@ class TodoList {
     card.appendChild(todoDescription);
     card.appendChild(todoDueDate);
     return card;
+  }
+
+  addTodo(todo) {
+    this.#todos.push(todo);
+    // eslint-disable-next-line no-unused-expressions
+    this.displayTodos;
   }
 
   displayTodos() {
