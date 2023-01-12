@@ -1,12 +1,8 @@
+import ProjectList from './ProjectList';
+import Project from './Project';
+
 const mainUI = () => {
-  const projectButton = () => {
-    const project = document.createElement('button');
-    project.classList.add('border-2', 'border-indigo-500', 'rounded-md', 'hover:bg-indigo-300', 'p-1');
-    project.addEventListener('click', () => {
-      console.log('clicked');
-    });
-    return project;
-  };
+  const projects = new ProjectList();
 
   const todoCard = (title, description, dueDate) => {
     const todo = document.createElement('div');
@@ -27,13 +23,12 @@ const mainUI = () => {
   };
   const addProject = () => {
     const formSubmit = document.querySelector('#project-submit');
-    const projectList = document.querySelector('#projects-list');
-    const project = projectButton();
     const projectInput = document.querySelector('#project-title');
     formSubmit.addEventListener('click', (e) => {
       const title = projectInput.value;
-      project.innerHTML = `${title}  ->`;
-      projectList.appendChild(project);
+      const project = new Project(projects.numProjects, title);
+      projects.addProject(project);
+      projects.displayProjects();
       projectInput.value = '';
       e.preventDefault();
     });
@@ -41,7 +36,7 @@ const mainUI = () => {
 
   const addTodo = () => {
     const formSubmit = document.querySelector('#todo-submit');
-    const todoList = document.querySelector('#todo-list');
+
     const title = document.querySelector('#todo-title');
     const description = document.querySelector('#todo-description');
     const date = document.querySelector('#todo-date');
