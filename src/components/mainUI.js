@@ -1,6 +1,5 @@
 import ProjectList from './ProjectList';
 import Project from './Project';
-import TodoItem from './TodoItem';
 
 const mainUI = () => {
   const projects = new ProjectList();
@@ -27,8 +26,7 @@ const mainUI = () => {
       const titleVal = title.value;
       const descriptionVal = description.value;
       const dateVal = date.value;
-      const todoItem = new TodoItem(titleVal, descriptionVal, dateVal);
-      projects.currentProject.addTodo(todoItem);
+      projects.currentProject.addTodo(titleVal, descriptionVal, dateVal);
       e.preventDefault();
       title.value = '';
       description.value = '';
@@ -41,8 +39,8 @@ const mainUI = () => {
     addTodo();
     const project1 = new Project(projects.numProjects, 'Emails');
     const project2 = new Project(projects.numProjects, 'Groceries');
-    project1.addTodo(new TodoItem('Gotta email dad', 'He really needs this email soon', new Date()));
-    project2.addTodo(new TodoItem('Gotta get groceries', "I'm very hungry rn", new Date()));
+    project1.addTodo('Gotta email dad', 'He really needs this email soon', new Date());
+    project2.addTodo('Gotta get groceries', "I'm very hungry rn", new Date());
     projects.addProject(project1);
     projects.addProject(project2);
     projects.currentProject = project1;

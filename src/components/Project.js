@@ -22,8 +22,8 @@ class Project {
     return this.#todolist;
   }
 
-  addTodo(todo) {
-    this.#todolist.addTodo(todo);
+  addTodo(name, description, date) {
+    this.#todolist.addTodo(name, description, date);
   }
 
   displayTodos() {

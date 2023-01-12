@@ -1,7 +1,9 @@
+import TodoItem from './TodoItem';
+
 class TodoList {
   #todos = [];
 
-  get todos() {
+  get getTodos() {
     return this.#todos;
   }
 
@@ -9,7 +11,7 @@ class TodoList {
     return this.#todos.length;
   }
 
-  static todoCard(todo) {
+  #todoCard(todo) {
     const card = document.createElement('div');
     const todoTitle = document.createElement('h3');
     const todoDescription = document.createElement('p');
@@ -20,24 +22,34 @@ class TodoList {
     todoTitle.classList.add('text-xl', 'font-bold');
     todoDescription.classList.add('text-lg');
     todoDueDate.classList.add('text-lg');
-    card.classList.add('border-2', 'border-indigo-500', 'rounded-md', 'hover:bg-indigo-300', 'p-1');
+    card.classList.add('border-2', 'border-indigo-500', 'rounded-md', 'hover:bg-indigo-300', 'p-1', 'cursor-pointer');
     card.appendChild(todoTitle);
     card.appendChild(todoDescription);
     card.appendChild(todoDueDate);
+
+    card.addEventListener('click', () => {
+      this.removeTodo(todo.getID);
+    });
     return card;
   }
 
-  addTodo(todo) {
+  addTodo(name, description, date) {
+    const id = this.#todos.length;
+    const todo = new TodoItem(id, name, description, date);
     this.#todos.push(todo);
-    // eslint-disable-next-line no-unused-expressions
-    this.displayTodos;
+    this.displayTodos();
+  }
+
+  removeTodo(todo) {
+    this.#todos = this.#todos.splice(todo.getID, todo.getID);
+    this.displayTodos();
   }
 
   displayTodos() {
     const todoList = document.querySelector('#todo-list');
     todoList.innerHTML = '';
     this.#todos.forEach((todo) => {
-      const card = TodoList.todoCard(todo);
+      const card = this.#todoCard(todo);
       todoList.appendChild(card);
     });
   }
