@@ -1,5 +1,6 @@
 import ProjectList from './ProjectList';
 import Project from './Project';
+import Storage from './Storage';
 
 const mainUI = () => {
   const projects = new ProjectList();
@@ -43,7 +44,9 @@ const mainUI = () => {
     project2.addTodo('Gotta get groceries', "I'm very hungry rn", new Date());
     projects.addProject(project1);
     projects.addProject(project2);
-    projects.currentProject = project1;
+    projects.setCurrentProject(project1);
+    Storage.saveProjectList(projects);
+    console.log('Project list:', localStorage.getItem('projectList'));
     projects.displayProjects();
   }
   return { render };

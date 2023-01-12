@@ -1,33 +1,39 @@
 import TodoList from './Todolist';
 
 class Project {
-  #todolist = new TodoList();
+  // #todolist = new TodoList();
 
-  #isCurrent = false;
+  // #isCurrent = false;
 
   constructor(id, name) {
     this.id = id;
     this.name = name;
+    this.todolist = new TodoList();
+    this.isCurrent = false;
   }
 
-  get isCurrent() {
-    return this.#isCurrent;
+  getIsCurrent() {
+    return this.isCurrent;
   }
 
-  set isCurrent(current) {
-    this.#isCurrent = current;
+  setIsCurrent(current) {
+    this.isCurrent = current;
   }
 
-  get todos() {
-    return this.#todolist;
+  getTodos() {
+    return this.todolist;
+  }
+
+  setTodos(todos) {
+    this.todolist = todos;
   }
 
   addTodo(name, description, date) {
-    this.#todolist.addTodo(name, description, date);
+    this.todolist.addTodo(name, description, date);
   }
 
   displayTodos() {
-    this.#todolist.displayTodos();
+    this.todolist.displayTodos();
   }
 }
 
