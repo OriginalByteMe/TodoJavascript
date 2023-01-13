@@ -10,8 +10,7 @@ const mainUI = () => {
     const projectInput = document.querySelector('#project-title');
     formSubmit.addEventListener('click', (e) => {
       const title = projectInput.value;
-      const project = new Project(projects.numProjects, title);
-      projects.addProject(project);
+      projects.addProject(title);
       projects.displayProjects();
       projectInput.value = '';
       e.preventDefault();
@@ -38,14 +37,15 @@ const mainUI = () => {
   function render() {
     addProject();
     addTodo();
-    const project1 = new Project(projects.numProjects, 'Emails');
-    const project2 = new Project(projects.numProjects, 'Groceries');
-    project1.addTodo('Gotta email dad', 'He really needs this email soon', new Date());
-    project2.addTodo('Gotta get groceries', "I'm very hungry rn", new Date());
+    const project1 = 'emails';
+    const project2 = 'Groceries';
     projects.addProject(project1);
+    projects.getCurrentProject().addTodo('Gotta email dad', 'He really needs this email soon', new Date());
     projects.addProject(project2);
-    projects.setCurrentProject(project1);
+    projects.getCurrentProject().addTodo('Gotta get groceries', "I'm very hungry rn", new Date());
+    projects.setCurrentProjectByIndex(0);
     Storage.saveProjectList(projects);
+    console.log('live projects:', projects);
     console.log('Project list:', localStorage.getItem('projectList'));
     projects.displayProjects();
   }

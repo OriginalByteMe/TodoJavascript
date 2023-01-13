@@ -1,3 +1,5 @@
+import Project from './Project';
+
 export default class ProjectList {
   constructor() {
     this.projects = [];
@@ -20,14 +22,22 @@ export default class ProjectList {
     return this.selectedProject;
   }
 
-  setCurrentProject(project) {
+  #setCurrentProject(project) {
     this.selectedProject.setIsCurrent(false);
 
     this.selectedProject = project;
     this.selectedProject.setIsCurrent(true);
   }
 
-  addProject(project) {
+  setCurrentProjectByIndex(index) {
+    this.selectedProject.setIsCurrent(false);
+
+    this.selectedProject = this.projects[index];
+    this.selectedProject.setIsCurrent(true);
+  }
+
+  addProject(name) {
+    const project = new Project(this.projects.length, name);
     this.projects.push(project);
     this.selectedProject = project;
   }
@@ -37,7 +47,7 @@ export default class ProjectList {
     projectBtn.innerHTML = `${project.name} ->`;
     projectBtn.classList.add('border-2', 'border-indigo-500', 'rounded-md', 'hover:bg-indigo-300', 'p-1');
     projectBtn.addEventListener('click', () => {
-      this.setCurrentProject(project);
+      this.#setCurrentProject(project);
       this.displayProjects();
     });
     return projectBtn;
