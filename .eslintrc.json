@@ -3,7 +3,7 @@
         "browser": true,
         "es2021": true
     },
-    "extends": "airbnb-base",
+    "extends": "eslint:recommended",
     "overrides": [
     ],
     "parserOptions": {
@@ -11,5 +11,18 @@
         "sourceType": "module"
     },
     "rules": {
+        "prefer-const": "error",
+        "max-depth": ["error", 4],
+        "no-compare-neg-zero": "error",
+        "no-const-assign": "error",
+        "no-duplicate-imports": "error",
+        "no-irregular-whitespace": "error",
+        "no-template-curly-in-string": "error",
+        "no-unreachable": "error",
+        "arrow-body-style": ["error", "as-needed"],
+        "camelcase": "error",
+        "class-methods-use-this": "error",
+        "eqeqeq": "error",
+        "max-len": "off"
     }
 }
