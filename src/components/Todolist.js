@@ -1,14 +1,20 @@
 import TodoItem from './TodoItem';
 
 class TodoList {
-  #todos = [];
-
-  get getTodos() {
-    return this.#todos;
+  constructor() {
+    this.todos = [];
   }
 
-  get numTodos() {
-    return this.#todos.length;
+  getTodos() {
+    return this.todos;
+  }
+
+  setTodos(todos) {
+    this.todos = todos;
+  }
+
+  getNumTodos() {
+    return this.todos.length;
   }
 
   #todoCard(todo) {
@@ -34,21 +40,21 @@ class TodoList {
   }
 
   addTodo(name, description, date) {
-    const id = this.#todos.length;
+    const id = this.getNumTodos();
     const todo = new TodoItem(id, name, description, date);
-    this.#todos.push(todo);
+    this.todos.push(todo);
     this.displayTodos();
   }
 
   removeTodo(todo) {
-    this.#todos = this.#todos.splice(todo.getID, todo.getID);
+    this.todos = this.todos.splice(todo.getID, todo.getID);
     this.displayTodos();
   }
 
   displayTodos() {
     const todoList = document.querySelector('#todo-list');
     todoList.innerHTML = '';
-    this.#todos.forEach((todo) => {
+    this.todos.forEach((todo) => {
       const card = this.#todoCard(todo);
       todoList.appendChild(card);
     });

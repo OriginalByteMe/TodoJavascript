@@ -10,6 +10,13 @@ export default class ProjectList {
     return this.projects;
   }
 
+  getProject(name) {
+    if (name) {
+      return this.getProjects().find((project) => project.getName() === name);
+    }
+    return this.getProjects().find((project) => project.getIsCurrent());
+  }
+
   setProjects(projects) {
     this.projects = projects;
   }
@@ -23,14 +30,24 @@ export default class ProjectList {
   }
 
   #setCurrentProject(project) {
-    this.selectedProject.setIsCurrent(false);
+    if (this.getProjects().length === 0) {
+      return;
+    }
+    if (this.selectedProject.length > 0) {
+      this.selectedProject.setIsCurrent(false);
+    }
 
     this.selectedProject = project;
     this.selectedProject.setIsCurrent(true);
   }
 
   setCurrentProjectByIndex(index) {
-    this.selectedProject.setIsCurrent(false);
+    if (this.getProjects().length === 0) {
+      return;
+    }
+    if (this.selectedProject.length > 0) {
+      this.selectedProject.setIsCurrent(false);
+    }
 
     this.selectedProject = this.projects[index];
     this.selectedProject.setIsCurrent(true);

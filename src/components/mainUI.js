@@ -1,5 +1,4 @@
 import ProjectList from './ProjectList';
-import Project from './Project';
 import Storage from './Storage';
 
 const mainUI = () => {
@@ -11,6 +10,7 @@ const mainUI = () => {
     formSubmit.addEventListener('click', (e) => {
       const title = projectInput.value;
       projects.addProject(title);
+      Storage.addProject(title);
       projects.displayProjects();
       projectInput.value = '';
       e.preventDefault();
@@ -39,15 +39,18 @@ const mainUI = () => {
     addTodo();
     const project1 = 'emails';
     const project2 = 'Groceries';
+    Storage.saveProjectList(projects);
     projects.addProject(project1);
+    Storage.addProject(project1);
     projects.getCurrentProject().addTodo('Gotta email dad', 'He really needs this email soon', new Date());
     projects.addProject(project2);
+    Storage.addProject(project2);
     projects.getCurrentProject().addTodo('Gotta get groceries', "I'm very hungry rn", new Date());
+    Storage.addTodo(project1, 'Gotta email dad', 'He really needs this email soon', new Date());
+    Storage.addTodo(project2, 'Gotta get groceries', "I'm very hungry rn", new Date());
     projects.setCurrentProjectByIndex(0);
-    Storage.saveProjectList(projects);
-    console.log('live projects:', projects);
-    console.log('Project list:', localStorage.getItem('projectList'));
     projects.displayProjects();
+    console.log("Retrieve saved projectlist: ",Storage.getProjectList());
   }
   return { render };
 };

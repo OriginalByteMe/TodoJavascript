@@ -1,15 +1,15 @@
 import TodoList from './Todolist';
 
 class Project {
-  // #todolist = new TodoList();
-
-  // #isCurrent = false;
-
   constructor(id, name) {
     this.id = id;
     this.name = name;
     this.todolist = new TodoList();
     this.isCurrent = false;
+  }
+
+  getName() {
+    return this.name;
   }
 
   getIsCurrent() {
@@ -20,15 +20,18 @@ class Project {
     this.isCurrent = current;
   }
 
-  getTodos() {
+  getTodoList() {
     return this.todolist;
   }
 
-  setTodos(todos) {
+  setTodoList(todos) {
     this.todolist = todos;
   }
 
   addTodo(name, description, date) {
+    if (name === undefined || description === undefined || date === undefined) {
+      return;
+    }
     this.todolist.addTodo(name, description, date);
   }
 
