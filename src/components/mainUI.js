@@ -1,6 +1,4 @@
 import ProjectList from './ProjectList';
-import Storage from './Storage';
-
 const mainUI = () => {
   const projects = new ProjectList();
 
