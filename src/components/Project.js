@@ -1,4 +1,6 @@
 import TodoList from './Todolist';
+import Storage from './Storage';
+import TodoItem from './TodoItem';
 
 class Project {
   constructor(id, name) {
@@ -28,13 +30,19 @@ class Project {
     this.todolist = todos;
   }
 
-  addTodo(name, description, date) {
+  addTodoByDetails(name, description, date) {
     if (name === undefined || description === undefined || date === undefined) {
       return;
     }
-    this.todolist.addTodo(name, description, date);
+    this.todolist.addTodoByDetails(name, description, date);
+    const todoItem = new TodoItem(this.todolist.getNumTodos(), name, description, date);
+    Storage.addTodo(this.name, todoItem);
   }
 
+  addTodo(todoItem){
+    console.log("Todoitem added:", todoItem)
+    this.todolist.addTodo(todoItem);
+  }
   displayTodos() {
     this.todolist.displayTodos();
   }

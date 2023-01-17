@@ -14,6 +14,10 @@ export default class Storage {
       JSON.parse(localStorage.getItem('projectList')),
     );
 
+    if (projectList === null || projectList.getProjects().numProjects === 0) {
+      return projectList;
+    }
+
     projectList.setProjects(
       projectList.getProjects().map((project) => Object.assign(new Project(), project)),
     );
@@ -40,21 +44,18 @@ export default class Storage {
     return projectList;
   }
 
-  static addTodo(projectName, name, description, date) {
+  static addTodo(projectName, todo) {
     const projectList = Storage.getProjectList();
-    if (projectList === null || projectList.getProjects().length === 0) {
-      return;
-    }
-    projectList.getProject(projectName).addTodo(name, description, date);
+    projectList.getProject(projectName).addTodo(todo);
     Storage.saveProjectList(projectList);
   }
 
-  static addProject(name) {
+  static addProject(project){
     const projectList = Storage.getProjectList();
     if (projectList === null) {
       return;
     }
-    projectList.addProject(name);
+    projectList.addProject(project);
     Storage.saveProjectList(projectList);
   }
 }

@@ -1,4 +1,5 @@
 import Project from './Project';
+import Storage from './Storage';
 
 export default class ProjectList {
   constructor() {
@@ -8,6 +9,15 @@ export default class ProjectList {
 
   getProjects() {
     return this.projects;
+  }
+
+  getStoredProjects() {
+    const projectList = Storage.getProjectList();
+    if (projectList === null || projectList.getProjects().length === 0) {
+      return;
+    }
+    this.setProjects(projectList.getProjects());
+    this.#setCurrentProject(projectList.getCurrentProject());
   }
 
   getProject(name) {
@@ -53,8 +63,15 @@ export default class ProjectList {
     this.selectedProject.setIsCurrent(true);
   }
 
-  addProject(name) {
+  addProjectByName(name) {
     const project = new Project(this.projects.length, name);
+    this.projects.push(project);
+    this.selectedProject = project;
+    Storage.addProject(project);
+    this.displayProjects()
+  }
+
+  addProject(project) {
     this.projects.push(project);
     this.selectedProject = project;
   }
@@ -71,12 +88,18 @@ export default class ProjectList {
   }
 
   displayProjects() {
+    if (this.numProjects === 0) {
+      return;
+    }
+
     const projectList = document.querySelector('#projects-list');
     projectList.innerHTML = '';
     this.projects.forEach((project) => {
       const projectBtn = this.#projectButton(project);
       if (project.getIsCurrent()) {
         projectBtn.classList.add('bg-lime-500');
+      } else {
+        projectBtn.classList.remove('bg-lime-500');
       }
       projectList.appendChild(projectBtn);
     });

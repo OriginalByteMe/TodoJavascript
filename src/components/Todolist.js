@@ -14,7 +14,7 @@ class TodoList {
   }
 
   getNumTodos() {
-    return this.todos.length;
+    return this.todos.length - 1;
   }
 
   #todoCard(todo) {
@@ -39,16 +39,26 @@ class TodoList {
     return card;
   }
 
-  addTodo(name, description, date) {
+  addTodoByDetails(name, description, date) {
     const id = this.getNumTodos();
     const todo = new TodoItem(id, name, description, date);
     this.todos.push(todo);
     this.displayTodos();
   }
 
-  removeTodo(todo) {
-    this.todos = this.todos.splice(todo.getID, todo.getID);
+  addTodo(todoItem){
+    this.todos.push(todoItem)
     this.displayTodos();
+  }
+
+  contains(todoId){
+    return this.todos.some((todo) => todo.getID === todoId)
+  }
+
+  removeTodo(todoID) {
+    this.todos = this.todos.filter((todo) => todo.getID !== todoID )
+    this.displayTodos();
+    // Storage.removeTodo(todo.getID);
   }
 
   displayTodos() {

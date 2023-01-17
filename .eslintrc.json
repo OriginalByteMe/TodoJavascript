@@ -21,7 +21,7 @@
         "no-unreachable": "error",
         "arrow-body-style": ["error", "as-needed"],
         "camelcase": "error",
-        "class-methods-use-this": "error",
+        "class-methods-use-this": "warn",
         "eqeqeq": "error",
         "max-len": "off"
     }

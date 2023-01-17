@@ -9,8 +9,7 @@ const mainUI = () => {
     const projectInput = document.querySelector('#project-title');
     formSubmit.addEventListener('click', (e) => {
       const title = projectInput.value;
-      projects.addProject(title);
-      Storage.addProject(title);
+      projects.addProjectByName(title);
       projects.displayProjects();
       projectInput.value = '';
       e.preventDefault();
@@ -26,7 +25,7 @@ const mainUI = () => {
       const titleVal = title.value;
       const descriptionVal = description.value;
       const dateVal = date.value;
-      projects.currentProject.addTodo(titleVal, descriptionVal, dateVal);
+      projects.getCurrentProject().addTodoByDetails(titleVal, descriptionVal, dateVal);
       e.preventDefault();
       title.value = '';
       description.value = '';
@@ -37,18 +36,8 @@ const mainUI = () => {
   function render() {
     addProject();
     addTodo();
-    const project1 = 'emails';
-    const project2 = 'Groceries';
-    Storage.saveProjectList(projects);
-    projects.addProject(project1);
-    Storage.addProject(project1);
-    projects.getCurrentProject().addTodo('Gotta email dad', 'He really needs this email soon', new Date());
-    projects.addProject(project2);
-    Storage.addProject(project2);
-    projects.getCurrentProject().addTodo('Gotta get groceries', "I'm very hungry rn", new Date());
-    Storage.addTodo(project1, 'Gotta email dad', 'He really needs this email soon', new Date());
-    Storage.addTodo(project2, 'Gotta get groceries', "I'm very hungry rn", new Date());
-    projects.setCurrentProjectByIndex(0);
+    // Storage.saveProjectList(projects);
+    projects.getStoredProjects();
     projects.displayProjects();
     console.log("Retrieve saved projectlist: ",Storage.getProjectList());
   }
