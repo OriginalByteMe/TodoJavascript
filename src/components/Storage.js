@@ -40,13 +40,18 @@ export default class Storage {
         (todo) => Object.assign(new TodoItem(), todo)))
         );
         
-    // projectList.getProjects().forEach((project) => { console.log("Project:",project,"\nTodos: ",project.getTodoList().getTodos()); });
     return projectList;
   }
 
   static addTodo(projectName, todo) {
     const projectList = Storage.getProjectList();
     projectList.getProject(projectName).addTodo(todo);
+    Storage.saveProjectList(projectList);
+  }
+
+  static removeTodo(projectName, todoID) {
+    const projectList = Storage.getProjectList();
+    projectList.getProject(projectName).getTodoList().removeTodo(todoID);
     Storage.saveProjectList(projectList);
   }
 

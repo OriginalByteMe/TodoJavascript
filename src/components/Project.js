@@ -6,7 +6,7 @@ class Project {
   constructor(id, name) {
     this.id = id;
     this.name = name;
-    this.todolist = new TodoList();
+    this.todolist = new TodoList(name);
     this.isCurrent = false;
   }
 
@@ -22,6 +22,9 @@ class Project {
     this.isCurrent = current;
   }
 
+  getTodos(){
+    return this.todolist.getTodos();
+  }
   getTodoList() {
     return this.todolist;
   }
@@ -40,11 +43,12 @@ class Project {
   }
 
   addTodo(todoItem){
-    console.log("Todoitem added:", todoItem)
     this.todolist.addTodo(todoItem);
   }
-  displayTodos() {
-    this.todolist.displayTodos();
+
+  removeTodo(todoItem){
+    this.todolist.removeTodo(todoItem);
+    Storage.removeTodo(this.name, todoItem);
   }
 }
 

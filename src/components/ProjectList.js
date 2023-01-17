@@ -43,7 +43,7 @@ export default class ProjectList {
     if (this.getProjects().length === 0) {
       return;
     }
-    if (this.selectedProject.length > 0) {
+    if (Object.keys(this.getCurrentProject()).length > 0) {
       this.selectedProject.setIsCurrent(false);
     }
 
@@ -81,10 +81,44 @@ export default class ProjectList {
     projectBtn.innerHTML = `${project.name} ->`;
     projectBtn.classList.add('border-2', 'border-indigo-500', 'rounded-md', 'hover:bg-indigo-300', 'p-1');
     projectBtn.addEventListener('click', () => {
+      console.log('Project :', project);
       this.#setCurrentProject(project);
       this.displayProjects();
     });
     return projectBtn;
+  }
+
+  #todoCard(project, todo) {
+    const card = document.createElement('div');
+    const todoTitle = document.createElement('h3');
+    const todoDescription = document.createElement('p');
+    const todoDueDate = document.createElement('p');
+    todoTitle.innerHTML = `${todo.name}`;
+    todoDescription.innerHTML = `${todo.description}`;
+    todoDueDate.innerHTML = `Due date: ${todo.date}`;
+    todoTitle.classList.add('text-xl', 'font-bold');
+    todoDescription.classList.add('text-lg');
+    todoDueDate.classList.add('text-lg');
+    card.classList.add('border-2', 'border-indigo-500', 'rounded-md', 'hover:bg-indigo-300', 'p-1', 'cursor-pointer');
+    card.appendChild(todoTitle);
+    card.appendChild(todoDescription);
+    card.appendChild(todoDueDate);
+
+    card.addEventListener('click', () => {
+      project.removeTodo(todo.getID);
+      this.displayProjects();
+    });
+    return card;
+  }
+
+  displayTodos(project){
+    const todos = project.getTodos();
+    const todoList = document.querySelector('#todo-list');
+    todoList.innerHTML = '';
+    todos.forEach((todo) => {
+      const card = this.#todoCard(project, todo);
+      todoList.appendChild(card);
+    });
   }
 
   displayProjects() {
@@ -98,11 +132,9 @@ export default class ProjectList {
       const projectBtn = this.#projectButton(project);
       if (project.getIsCurrent()) {
         projectBtn.classList.add('bg-lime-500');
-      } else {
-        projectBtn.classList.remove('bg-lime-500');
+        this.displayTodos(project);
       }
       projectList.appendChild(projectBtn);
     });
-    this.selectedProject.displayTodos();
   }
 }

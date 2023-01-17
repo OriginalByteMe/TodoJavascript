@@ -26,20 +26,20 @@ const mainUI = () => {
       const descriptionVal = description.value;
       const dateVal = date.value;
       projects.getCurrentProject().addTodoByDetails(titleVal, descriptionVal, dateVal);
-      e.preventDefault();
+      projects.displayProjects();
       title.value = '';
       description.value = '';
       date.value = '';
+      e.preventDefault();
     });
   };
 
+  
   function render() {
     addProject();
     addTodo();
-    // Storage.saveProjectList(projects);
     projects.getStoredProjects();
     projects.displayProjects();
-    console.log("Retrieve saved projectlist: ",Storage.getProjectList());
   }
   return { render };
 };
